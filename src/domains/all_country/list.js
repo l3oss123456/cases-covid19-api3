@@ -11,32 +11,34 @@ const list_covid19_all_country = async (country, lastdays) => {
 
     for (let key in country) {
       const resp = await axios(`GET`, `/${country[key]}?lastdays=${lastdays}`);
-      date = Object.keys(resp.data.timeline.cases);
 
-      if (resp.status === 200) {
-        const cases = Object.values(resp.data.timeline.cases);
-        for (let index in cases) {
-          amount_covid19 += cases[index];
+      if (!R.isNil(resp.data.timeline) || !R.isEmpty(resp.data.timeline)) {
+        date = Object.keys(resp.data.timeline.cases);
+        if (resp.status === 200) {
+          const cases = Object.values(resp.data.timeline.cases);
+          for (let index in cases) {
+            amount_covid19 += cases[index];
+          }
+
+          const deaths = Object.values(resp.data.timeline.deaths);
+          for (let index in deaths) {
+            amount_deads += cases[index];
+          }
+
+          const recovered = Object.values(resp.data.timeline.recovered);
+          for (let index in recovered) {
+            amount_recovered += cases[index];
+          }
+
+          _listData.push({
+            country: resp.data.country,
+            cases: amount_covid19,
+            deaths: amount_deads,
+            recovered: amount_recovered,
+          });
         }
-
-        const deaths = Object.values(resp.data.timeline.deaths);
-        for (let index in deaths) {
-          amount_deads += cases[index];
-        }
-
-        const recovered = Object.values(resp.data.timeline.recovered);
-        for (let index in recovered) {
-          amount_recovered += cases[index];
-        }
-
-        _listData.push({
-          country: resp.data.country,
-          cases: amount_covid19,
-          deaths: amount_deads,
-          recovered: amount_recovered,
-        });
+        amount_covid19 = 0;
       }
-      amount_covid19 = 0;
     }
 
     if (_listData) {

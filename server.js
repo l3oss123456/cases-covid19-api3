@@ -36,8 +36,10 @@ const country = [
   "Switzerland",
   "India",
   "Portugal",
-  "Korea",
   "Austria",
+  "Cambodia",
+  "Cameroon",
+  "Canada",
 ];
 
 let lastdays = 1;
@@ -49,7 +51,4 @@ setInterval(async () => {
   if (lastdays > 30) {
     lastdays = 1;
   }
-  // wss.clients.forEach((client) => {
-  //   client.send(new Date().toTimeString());
-  // });
-}, 1000);
+}, 3000);
