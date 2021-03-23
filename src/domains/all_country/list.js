@@ -20,21 +20,21 @@ const list_covid19_all_country = async (country, lastdays) => {
             amount_covid19 += cases[index];
           }
 
-          const deaths = Object.values(resp.data.timeline.deaths);
-          for (let index in deaths) {
-            amount_deads += cases[index];
-          }
+          // const deaths = Object.values(resp.data.timeline.deaths);
+          // for (let index in deaths) {
+          //   amount_deads += cases[index];
+          // }
 
-          const recovered = Object.values(resp.data.timeline.recovered);
-          for (let index in recovered) {
-            amount_recovered += cases[index];
-          }
+          // const recovered = Object.values(resp.data.timeline.recovered);
+          // for (let index in recovered) {
+          //   amount_recovered += cases[index];
+          // }
 
           _listData.push({
             country: resp.data.country,
             cases: amount_covid19,
-            deaths: amount_deads,
-            recovered: amount_recovered,
+            // deaths: amount_deads,
+            // recovered: amount_recovered,
           });
         }
         amount_covid19 = 0;
